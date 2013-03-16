@@ -2,10 +2,10 @@ package dragondungeon;
 
 public class Plan {
 	
-	private char[][] hindringer;
+	private short[][] hindringer;
 	private float x, y, localScale;
 	
-	public Plan(char[][] hindringer) {
+	public Plan(short[][] hindringer) {
 		//TODO: sjekk dimensjoner
 		
 		this.hindringer = hindringer;
@@ -13,19 +13,19 @@ public class Plan {
 	
 	public Plan(boolean harHindringer) {
 		if(harHindringer)
-			hindringer = new char[4][5];
+			hindringer = new short[4][5];
 	}
 	
 	public boolean harHindringer() {
 		return hindringer != null;
 	}
 	
-	public char getHindring(int x, int y) {
+	public short getHindring(int x, int y) {
 		return hindringer[y][x];
 	}
 	
 	//TODO:: skal sikkert fjernes
-	public void setHindring(int x, int y, char verdi) {
+	public void setHindring(int x, int y, short verdi) {
 		hindringer[y][x] = verdi;
 	}
 

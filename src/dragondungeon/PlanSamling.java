@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
-import org.newdawn.slick.Image;
 
 public class PlanSamling implements Iterable<Plan> {
 	
@@ -12,7 +11,6 @@ public class PlanSamling implements Iterable<Plan> {
 	private static final int RAMME_BREDDE = 68;
 	
 	private LinkedList<Plan> planListe;
-	private float masterScale;
 	private int levelWidth, levelHeight;
 	
 	public PlanSamling(int levelWidth, int levelHeight) {
@@ -27,8 +25,6 @@ public class PlanSamling implements Iterable<Plan> {
 	}
 	
 	public void setScale(float scale) {
-		masterScale = scale;
-		
 		
 		float lokalScale = scale;
 		
@@ -65,6 +61,10 @@ public class PlanSamling implements Iterable<Plan> {
 	
 	public ListIterator<Plan> listIterator() {
 		return planListe.listIterator();
+	}
+	
+	public Plan peek() {
+		return planListe.getFirst();
 	}
 	
 
