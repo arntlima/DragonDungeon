@@ -67,5 +67,13 @@ public class PlanSamling implements Iterable<Plan> {
 		return planListe.getFirst();
 	}
 	
+	public Plan getPlan(int index) {
+		return planListe.get(index);
+	}
+
+	public int size() {
+		return planListe.size();
+	}
+	
 
 }

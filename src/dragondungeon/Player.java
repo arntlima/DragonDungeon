@@ -42,19 +42,19 @@ public class Player {
 	}
 	
 	public float getGlobalSenterX() {
-		return x + lokalSenterX;
+		return x + lokalSenterX-10;
 	}
 	
 	public float getGlobalSenterY() {
-		return y + lokalSenterY;
+		return y + lokalSenterY+10;
 	}
 	
 	public float getLokalSenterX() {
-		return lokalSenterX;
+		return lokalSenterX-10;
 	}
 	
 	public float getLokalSenterY() {
-		return lokalSenterY;
+		return lokalSenterY+10;
 	}
 	
 	

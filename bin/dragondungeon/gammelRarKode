@@ -1,0 +1,86 @@
+/*private void sjekkKollisjonHindring(int delta) {
+		
+		
+		
+		//sjekk kollisjon med hindringer
+		Plan plan = planSamling.getPlan(3);
+		float planScale = plan.getLocalScale();
+		
+		if(plan.harHindringer()) {
+		
+			for(int y = 0; y < RUTERY; y++) {
+				for(int x = 0; x < RUTERX; x++) {
+				
+					if(plan.getHindring(x, y) != 'o') {
+						
+						//float hindringGlobalX = (x + 0.5f)* SCREEN_WIDTH / RUTERX;
+						//float hindringGlobalY = (y + 0.5f)* SCREEN_HEIGHT / RUTERY;
+						
+						float hindringGlobalX = planScale * (x + 0.5f)* SCREEN_WIDTH / RUTERX;
+						float hindringGlobalY = planScale * (y + 0.5f)* SCREEN_HEIGHT / RUTERY;
+						
+						float playerinPlanX=planScale*spiller.getGlobalSenterX();
+						float playerinPlanY=planScale*spiller.getGlobalSenterY();
+						
+						
+						float dx = hindringGlobalX - playerinPlanX;
+						float dy = hindringGlobalY -playerinPlanY;
+						
+						if( Math.pow(dx, 2) / Math.pow(ELLIPSE_BREDDE, 2) + Math.pow(dy,  2) / Math.pow(ELLIPSE_HOYDE, 2) < 1 ) {
+							
+							straff++;
+							remainingDustTime = dustDuration;
+							straffTimer += 1000;
+							System.out.println("Krasjhindring");
+							
+							
+						}
+						
+						
+						/*
+						
+						
+						
+						
+						float distanseSpillerHinding = (float) (Math.pow(dx,  2) + Math.pow(dy, 2));
+						System.out.println("dist : "+distanseSpillerHinding);
+						
+						
+						if( distanseSpillerHinding  < Math.pow(KOLLISJON_AVSTAND_HINDRING, 2) ) {
+							straff++;
+							remainingDustTime = dustDuration;
+							straffTimer += 1000;
+							System.out.println("Krasjhindring");
+						}
+						
+						
+						
+						/*
+						if(Math.abs(spiller.getGlobalSenterX() -hindringGlobalX) < KOLLISJON_AVSTAND) {
+							
+							System.out.println("Kollisjon x: x="+x+", y="+y);
+							
+							straff++;
+							remainingDustTime = dustDuration;
+							straffTimer += 1000;
+							
+							
+						} else if(Math.abs(spiller.getGlobalSenterY() -hindringGlobalY) < KOLLISJON_AVSTAND) {
+							
+							System.out.println("Kollisjon y: x="+x+", y="+y);
+							
+							straff++;
+							remainingDustTime = dustDuration;
+							straffTimer += 1000;
+							
+						}
+						
+						
+					}
+				
+				}
+			}
+		}
+		
+	}
+	*/
