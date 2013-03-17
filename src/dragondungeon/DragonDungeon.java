@@ -70,7 +70,8 @@ public class DragonDungeon extends BasicGame {
 	public DragonDungeon() {
 		super("DragonDungeon");
 		
-		ddInput = new KeyboardInput();
+		//ddInput = new KeyboardInput();
+		ddInput = new comPortJoystick();
 		renderingRatio = RENDERING_CONST_HIGH;
 		
 		
@@ -94,6 +95,7 @@ public class DragonDungeon extends BasicGame {
 		
 		ListIterator<Plan> iterator = planSamling.listIterator();
 		
+		/*
 		if(hindringForm != null && spillerFrom != null) {
 			g.draw(hindringForm);
 			g.draw(spillerFrom);
@@ -103,6 +105,7 @@ public class DragonDungeon extends BasicGame {
 		//	pause = true;
 			
 		}
+		*/
 		
 		
 		int teller = 0;
