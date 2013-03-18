@@ -9,7 +9,6 @@ import java.util.ListIterator;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -70,8 +69,8 @@ public class DragonDungeon extends BasicGame {
 	public DragonDungeon() {
 		super("DragonDungeon");
 		
-		//ddInput = new KeyboardInput();
-		ddInput = new comPortJoystick();
+		ddInput = new KeyboardInput();
+		//ddInput = new comPortJoystick();
 		renderingRatio = RENDERING_CONST_HIGH;
 		
 		
@@ -95,7 +94,7 @@ public class DragonDungeon extends BasicGame {
 		
 		ListIterator<Plan> iterator = planSamling.listIterator();
 		
-		/*
+		
 		if(hindringForm != null && spillerFrom != null) {
 			g.draw(hindringForm);
 			g.draw(spillerFrom);
@@ -105,7 +104,7 @@ public class DragonDungeon extends BasicGame {
 		//	pause = true;
 			
 		}
-		*/
+		
 		
 		
 		int teller = 0;
@@ -114,7 +113,7 @@ public class DragonDungeon extends BasicGame {
 			float lokalScale  = plan.getLocalScale();
 			
 			//tegn ramme
-			new Image("frame.png").draw(plan.getX(), plan.getY(), lokalScale);
+			//new Image("frame.png").draw(plan.getX(), plan.getY(), lokalScale);
 			
 			teller++;
 						
@@ -397,12 +396,8 @@ public class DragonDungeon extends BasicGame {
 		if(scale > 1.17f) {
 			scale = 1;
 			
-			
-			
-			
 			sjekkKollisjonHindring(delta);
 			planSamling.endOfPlan();
-			
 			
 			
 		}

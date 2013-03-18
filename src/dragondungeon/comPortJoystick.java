@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.ListIterator;
 import java.util.StringTokenizer;
 import java.util.TooManyListenersException;
 
@@ -28,9 +30,13 @@ public class comPortJoystick implements DDInput, SerialPortEventListener {
 	float speedX, speedY;
 	boolean knapp;
 	
-	Q queue;
+	LinkedList<Integer> data;
 
 	public comPortJoystick() {
+		
+		data = new LinkedList<Integer>();
+		
+		
 		CommPortIdentifier portId = null;
 
 		Enumeration<CommPortIdentifier> portList = CommPortIdentifier.getPortIdentifiers();
@@ -94,30 +100,17 @@ public class comPortJoystick implements DDInput, SerialPortEventListener {
             break;
         case SerialPortEvent.DATA_AVAILABLE:
         	
-        	byte[] readBuffer = new byte[20];
         	
         	
 			try {
-				//StringTokenizer st = new StringTokenizer(reader.readLine(), ";");
 				
-				String linje = "";
-				char inn = 0;
-				while(inn != 13 && inn != '\n') {
-	                   inn = (char) inputStream.read();
-	                   linje += inn;
-                }
+				int dataMengde = inputStream.available();
 				
-				System.out.println(linje);
+				while(dataMengde > 0) {
+					data.add(inputStream.read());
+				}
 				
-				StringTokenizer st = new StringTokenizer(linje, ";");
-				
-				speedX = Float.parseFloat(st.nextToken());
-				speedX -= 507;
-				speedX /= -10;
-				
-				speedY = Float.parseFloat(st.nextToken());
-				speedY -= 524;
-				speedY /= 10;
+				spisData();
 				
 				
 				
@@ -130,6 +123,60 @@ public class comPortJoystick implements DDInput, SerialPortEventListener {
         }
     }
 
+
+	private void spisData() {
+		System.out.println("NamNam");
+		
+		ListIterator<Integer> iterator = data.listIterator(data.size());
+		
+		//finn riktig posisjon
+		boolean startOfline = false;
+		boolean endOfLine = false;
+		while(iterator.hasPrevious()) {
+			Integer tegn = iterator.previous();
+			
+			if(tegn == '\r' && endOfLine == false) {
+				endOfLine = true;
+			} else if(tegn == '\n' && endOfLine == true) {
+				startOfline = true;
+				break;
+			}
+		}
+		
+		//ukomplett datsett
+		if(!startOfline) return;
+		
+		//les komplett datalinje
+		int[] verdier = new int[4];
+		
+		int teller = 0;
+		while(iterator.hasNext()) {
+			
+			Integer tegn = iterator.next();
+			
+			if(tegn == ';') {
+				teller++;
+				continue;
+			} else if(tegn == '\r') {
+				break;
+			}
+			
+			verdier[teller] =  ( (verdier[teller] << 3) + (verdier[teller] << 1) + (tegn - 48) );
+			
+		}
+		
+		//slett hode / eldste data
+		while(iterator.hasPrevious()) {
+			data.removeFirst();
+		}
+		
+		speedX = ( verdier[0] -506 ) / 25;
+		speedY = ( verdier[1] -524 ) / 25;
+		
+		knapp = verdier[2] == 1;
+		
+		
+	}
 
 	public void kalibrer() {
 
